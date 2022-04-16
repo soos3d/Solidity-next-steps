@@ -383,3 +383,25 @@ contract ERC20token is Context, IERC20, IERC20Metadata {
         uint256 amount
     ) internal virtual {}
 }
+
+// This contract allows the owner to mint and burn tokens!
+// As you can see it inherits the functions from the other contract, then we just call them
+
+contract MintableToken is ERC20token {
+
+    address owner;
+
+    constructor() ERC20token("Better $", "DLR", 1000) {
+            owner = msg.sender;
+     }
+
+    function mint(address account, uint256 amount) public  {
+        require(msg.sender == owner , "Only the owner can mint");
+        _mint(account, amount);
+    }
+
+    function burn(address account, uint256 amount) public  {
+        require(msg.sender == owner , "Only the owner can burn");
+        _burn(account, amount);
+    }
+}

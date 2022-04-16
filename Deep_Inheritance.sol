@@ -36,7 +36,7 @@ contract SecondContract is FirstContract {                              // the k
         return super.numberOne();                                   // the word super access the original function
     }
 
-    function letters() public pure returns (string memory) {
+    function letters() public pure virtual returns (string memory) {
         return "I am only in the second contract";
     }
 }
@@ -53,6 +53,10 @@ contract ThirdContract is FirstContract , SecondContract {
 
     function numberTwo() public pure virtual override(FirstContract , SecondContract) returns (uint) {
         return 700;
+    }
+    
+    function letters() public pure override returns (string memory) {
+        return "I am only in the second contract";
     }
 }
 
